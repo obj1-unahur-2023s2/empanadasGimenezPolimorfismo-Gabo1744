@@ -1,0 +1,58 @@
+import empleados.*
+
+describe "testing de Galván" {
+
+	test "cobrar el sueldo" {
+		galvan.cobrarSueldo()
+		assert.equals(150000,galvan.totalDinero())
+	}
+	test "Debe 40000"{
+		galvan.gastar(40000)
+		assert.equals(40000,galvan.totalDeuda())
+		assert.equals(0,galvan.totalDinero())
+	}
+	test "Debe 120000"{
+		galvan.gastar(120000)
+		assert.equals(120000,galvan.totalDeuda())
+		assert.equals(0,galvan.totalDinero())
+	}
+	test "Debe 12000 y cobro sueldo"{
+		galvan.gastar(120000)
+		galvan.cobrarSueldo()
+		assert.equals(0,galvan.totalDeuda())
+		assert.equals(30000,galvan.totalDinero())
+	}
+	test "gasto 250000,en cuenta tenia 30000 y le Debe 220000"{
+		galvan.gastar(120000)
+		galvan.cobrarSueldo()
+		galvan.gastar(250000)
+		assert.equals(220000,galvan.totalDeuda())
+		assert.equals(0,galvan.totalDinero())
+	}
+	test "Debe 220000 y cobra 150000, queda Debiendo 70000"{
+		galvan.gastar(220000)
+		galvan.cobrarSueldo()
+		assert.equals(70000,galvan.totalDeuda())
+		assert.equals(0,galvan.totalDinero())
+	}
+}
+
+describe "testing de Baigorria" {
+
+	test "cobrar el sueldo" {
+		baigorria.venderEmpanadas(900)
+		baigorria.cobrarSueldo()
+		assert.equals(135000,baigorria.totalCobrado())
+	}
+}
+
+describe "testing del señor Giménez" {
+
+	test "pagar sueldos" {
+		baigorria.venderEmpanadas(900)
+		srGimenez.pagarA(baigorria)
+		srGimenez.pagarA(galvan)
+		assert.equals(2715000,srGimenez.fondoSueldo())
+
+	}
+}
